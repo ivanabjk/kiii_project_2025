@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Component
 public class StorageServiceImpl implements StorageService {
 	
-	@Value("${disk.upload.basepath}")
+	@Value("${disk.upload.basepath:/tmp/images}")
 	private String BASEPATH;
 
 	
