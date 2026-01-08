@@ -52,4 +52,4 @@ jobs:
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAMESPACE }}/ecommerce-backend:latest
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAMESPACE }}/ecommerce-backend:${{ env.SHA_TAG }}
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAMESPACE }}/ecommerce-frontend:${{ github.ref_name }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAMESPACE }}/ecommerce-backend:${{ github.ref_name }}
