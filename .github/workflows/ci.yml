@@ -3,6 +3,8 @@ name: CI - Build and Push Docker Images
 on:
   push:
     branches: [ "main", "master" ]
+    tags:
+      - 'v*.*.*'
   pull_request:
 
 jobs:
@@ -39,6 +41,7 @@ jobs:
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAMESPACE }}/ecommerce-frontend:latest
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAMESPACE }}/ecommerce-frontend:${{ env.SHA_TAG }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAMESPACE }}/ecommerce-frontend:${{ github.ref_name }}
 
       - name: Build & push backend
         uses: docker/build-push-action@v5
@@ -49,3 +52,4 @@ jobs:
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAMESPACE }}/ecommerce-backend:latest
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAMESPACE }}/ecommerce-backend:${{ env.SHA_TAG }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAMESPACE }}/ecommerce-frontend:${{ github.ref_name }}
