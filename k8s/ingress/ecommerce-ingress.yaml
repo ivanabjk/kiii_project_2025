@@ -1,0 +1,61 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: path-rewrite
+  namespace: ecommerce
+spec:
+  stripPrefix:
+    forceSlash: false
+    prefixes:
+      - /api
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ecommerce-ingress
+  namespace: ecommerce
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    ingress.kubernetes.io/ssl-redirect: "false"
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+    traefik.ingress.kubernetes.io/router.middlewares: ecommerce-path-rewrite@kubernetescrd,ecommerce-redirect-localhost-api@kubernetescrd,ecommerce-cors@kubernetescrd
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: ecommerce.local
+    http:
+      paths:
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: backend-service
+            port:
+              number: 8080
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend-service
+            port:
+              number: 80
+  - host: api.ecommerce.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: backend-service
+            port:
+              number: 8080
+  - host: frontend.ecommerce.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend-service
+            port:
+              number: 80

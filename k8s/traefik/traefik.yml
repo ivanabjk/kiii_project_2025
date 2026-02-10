@@ -1,0 +1,13 @@
+entryPoints:
+  web:
+    address: ":80"
+  traefik:
+    address: ":8080"
+
+providers:
+  kubernetesCRD: {}
+  kubernetesIngress: {}
+
+api:
+  dashboard: true
+  insecure: true

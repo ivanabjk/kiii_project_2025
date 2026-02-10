@@ -1,0 +1,16 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: cors-options
+  namespace: ecommerce
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Method(`OPTIONS`) && PathPrefix(`/api`)
+      kind: Rule
+      middlewares:
+        - name: cors
+      services:
+        - name: noop@internal
+          kind: TraefikService

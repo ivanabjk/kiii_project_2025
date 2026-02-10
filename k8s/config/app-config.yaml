@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: ecommerce
+data:
+  SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/online_shopping?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+  SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+  SPRING_JPA_HIBERNATE_DDL_AUTO: update

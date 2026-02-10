@@ -1,13 +1,9 @@
-target/
-
 .eclipse/
 .project
 .classpath
 
 Thumbs.db*
 
-# Maven
-**/pom.xml
 
 # Application specific log files
 *.log
